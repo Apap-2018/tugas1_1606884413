@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.apap.tugas1.model.JabatanModel;
-import com.apap.tugas1.model.PegawaiModel;
 import com.apap.tugas1.service.JabatanPegawaiService;
 import com.apap.tugas1.service.JabatanService;
 import com.apap.tugas1.service.PegawaiService;
@@ -38,8 +37,9 @@ public class JabatanController {
 	}
 	
 	@RequestMapping(value="/jabatan/tambah",method=RequestMethod.POST)
-	private String addPilotSubmit(@ModelAttribute JabatanModel jabatan) {
+	private String addPilotSubmit(@ModelAttribute JabatanModel jabatan, Model model) {
 		jabatanService.addJabatan(jabatan);
+		model.addAttribute("pesan", "Jabatan "+jabatan.getNama()+" berhasil ditambah");
 		return "add";
 	}
 	
@@ -68,8 +68,9 @@ public class JabatanController {
 	}
 	
 	@RequestMapping(value="/jabatan/ubah",method=RequestMethod.POST)
-	private String ubahJabatanSubmit(@ModelAttribute JabatanModel jabatan) {
+	private String ubahJabatanSubmit(@ModelAttribute JabatanModel jabatan,Model model) {
 		jabatanService.addJabatan(jabatan);
+		model.addAttribute("pesan", "Jabatan Berhasil Diubah");
 		return "add";
 	}
 	
@@ -82,6 +83,7 @@ public class JabatanController {
 		else {
 			if (jabatan.getPegawaiList().size()==0) {
 				jabatanService.deleteJabatan(jabatan);
+				model.addAttribute("pesan", "Jabatan Berhasil Dihapus");
 				return "add";
 			}
 			else {

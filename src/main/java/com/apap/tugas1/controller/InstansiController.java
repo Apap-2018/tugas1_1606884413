@@ -31,10 +31,10 @@ public class InstansiController {
 			PegawaiModel tertua = pegawais.get(0);
 			PegawaiModel termuda = pegawais.get(0);
 			for (PegawaiModel pegawai : pegawais) {
-				if (pegawai.getTanggalLahir().compareTo(tertua.getTanggalLahir())<1) {
+				if (pegawai.getTanggalLahir().compareTo(tertua.getTanggalLahir())<0) {
 					tertua = pegawai;
 				}
-				if (pegawai.getTanggalLahir().compareTo(termuda.getTanggalLahir())>1) {
+				if (pegawai.getTanggalLahir().compareTo(termuda.getTanggalLahir())>0) {
 					termuda = pegawai;
 				}
 			}

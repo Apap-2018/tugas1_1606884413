@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.apap.tugas1.model.InstansiModel;
 import com.apap.tugas1.model.JabatanModel;
@@ -89,6 +90,7 @@ public class PegawaiController {
 		}
 		pegawai.setNip(nip);
 		pegawaiService.addPegawai(pegawai);
+		model.addAttribute("pesan", "Pegawai NIP "+nip+" berhasil diubah");
         return "add";
     }
 	
@@ -154,6 +156,7 @@ public class PegawaiController {
 		}
 		pegawai.setNip(nip);
 		pegawaiService.addPegawai(pegawai);
+		model.addAttribute("pesan", "Pegawai NIP "+nip+" berhasil ditambahkan");
         return "add";
     }
 	
@@ -241,10 +244,11 @@ public class PegawaiController {
 	}
 	
 	@RequestMapping("/pegawai")
-	private String viewPegawai(@RequestParam(value="nip", required = true) String nip, Model model) {
+	private String viewPegawai(RedirectAttributes redirAttr, @RequestParam(value="nip", required = true) String nip, Model model) {
 		PegawaiModel pegawai = pegawaiService.getPegawaiDetailByNip(nip);
 		if (pegawai==null) {
-			return "haha";
+			redirAttr.addFlashAttribute("pesan","NIP tidak ditemukan");
+			return "redirect:/";
 		}
 		else {
 			model.addAttribute("pegawai", pegawai);
