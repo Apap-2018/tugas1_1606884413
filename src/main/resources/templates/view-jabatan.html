@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head><title th:text="${jabatan.nama}"></title></head>
 	<body>
-		<h2 th:text="'Lihat Data Jabatan - '+${jabatan.nama}"></h2>
+		<h2 th:text="'Lihat Data Jabatan '+${jabatan.nama}"></h2>
 		
 		<table style="width:30%">
 		    <tr>
@@ -18,8 +18,12 @@
 		        <td th:text="'Rp. '+${jabatan.gajiPokok}"></td>
 		    </tr>
 		</table>
-		<button>Ubah</button>
-		<button>Hapus</button>
+		<a th:href="@{/jabatan/ubah(idJabatan=${jabatan.id})}">Ubah</a>
+		<form th:action="@{/jabatan/hapus}" method="POST">
+			<input type="hidden" name="idJabatan" th:value="${jabatan.id}" />
+			<button type="submit">Hapus</button>
+		</form>
+		
 		
 	</body>
 </html>

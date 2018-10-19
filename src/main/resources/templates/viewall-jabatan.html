@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:text="'Lihat Semua Jabatan'"></title>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+		
+	</head>
+	<body>
+		<h2>Lihat Semua Jabatan</h2>
+		<table id="table">
+		<thead>
+			<tr>
+			    <th>Nama</th>
+			    <th>Deskripsi</th> 
+			    <th>Gaji Pokok</th>
+		  	</tr>
+	  	</thead>
+	  	<tbody>
+			<tr th:each="jab : ${jabatan}"  >
+			    <td th:text="${jab.nama}"></td> 
+			    <td th:text="${jab.deskripsi}"></td>      
+			    <td th:text="${jab.gajiPokok}"></td>   
+			</tr>
+		</tbody> 
+		</table>
+		<br>
+		<script>
+			$(document).ready( function () {
+			    $('#table').DataTable();
+			} );
+		</script>
+	</body>
+</html>

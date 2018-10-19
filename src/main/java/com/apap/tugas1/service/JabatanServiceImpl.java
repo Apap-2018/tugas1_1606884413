@@ -32,6 +32,12 @@ public class JabatanServiceImpl implements JabatanService {
 	public JabatanModel getJabatanById(Long id) {
 		return jabatanDB.findById(id).get();
 	}
+
+	@Override
+	public void deleteJabatan(JabatanModel jabatan) {
+		// TODO Auto-generated method stub
+		jabatanDB.delete(jabatan);
+	}
 	
 	
 

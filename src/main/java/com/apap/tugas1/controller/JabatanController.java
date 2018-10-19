@@ -1,5 +1,7 @@
 package com.apap.tugas1.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +44,7 @@ public class JabatanController {
 	}
 	
 	@RequestMapping("/jabatan/view")
-	private String viewPegawai(@RequestParam(value="idJabatan", required = true) Long id, Model model) {
+	private String viewJabatan(@RequestParam(value="idJabatan", required = true) Long id, Model model) {
 		JabatanModel jabatan = jabatanService.getJabatanById(id);
 		if (jabatan==null) {
 			return "haha";
@@ -52,7 +54,49 @@ public class JabatanController {
 		}
 		return "view-jabatan";
 	}
-
+	
+	@RequestMapping("/jabatan/ubah")
+	private String ubahJabatan(@RequestParam(value="idJabatan", required = true) Long id, Model model) {
+		JabatanModel jabatan = jabatanService.getJabatanById(id);
+		if (jabatan==null) {
+			return "haha";
+		}
+		else {
+			model.addAttribute("jabatan", jabatan);
+		}
+		return "edit-jabatan";
+	}
+	
+	@RequestMapping(value="/jabatan/ubah",method=RequestMethod.POST)
+	private String ubahJabatanSubmit(@ModelAttribute JabatanModel jabatan) {
+		jabatanService.addJabatan(jabatan);
+		return "add";
+	}
+	
+	@RequestMapping(value="/jabatan/hapus",method=RequestMethod.POST)
+	private String hapusJabatan(@RequestParam(value="idJabatan", required = true) Long id, Model model) {
+		JabatanModel jabatan = jabatanService.getJabatanById(id);
+		if (jabatan==null) {
+			return "haha";
+		}
+		else {
+			if (jabatan.getPegawaiList().size()==0) {
+				jabatanService.deleteJabatan(jabatan);
+				return "add";
+			}
+			else {
+				return "haha";
+			}
+		}
+		
+	}
+	
+	@RequestMapping("/jabatan/viewall")
+	private String viewAllJabatan(Model model) {
+		List<JabatanModel> jabatan = jabatanService.getListJabatan();
+		model.addAttribute("jabatan",jabatan);
+		return "viewall-jabatan";
+	}
 
  
 
