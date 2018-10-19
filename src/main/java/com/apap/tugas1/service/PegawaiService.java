@@ -7,4 +7,5 @@ import com.apap.tugas1.model.PegawaiModel;
 public interface PegawaiService {
 	PegawaiModel getPegawaiDetailByNip(String nip);
 	List<PegawaiModel> getPegawaiList();
+	void addPegawai(PegawaiModel pegawai);
 }

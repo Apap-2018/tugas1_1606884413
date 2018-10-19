@@ -27,4 +27,11 @@ public class PegawaiServiceImpl implements PegawaiService {
 		return pegawaiDB.findAll();
 	}
 
+	@Override
+	public void addPegawai(PegawaiModel pegawai) {
+		// TODO Auto-generated method stub
+		pegawaiDB.save(pegawai);
+		
+	}
+
 }
